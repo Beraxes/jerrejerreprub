@@ -18,13 +18,13 @@ $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
 // Check if the file already exists
 if (file_exists($target_file)) {
-    echo "Archivo ya existe.\n";
+    echo '<script>console.log("Archivo ya existe.")</script>';
     $uploadOk = 0;
 }
 
 // If there were no upload errors, move the file
 if ($uploadOk === 0) {
-    echo "\nEl archivo no fue subido.";
+    echo '<script>console.log("Archivo no fue subido.")</script>';
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "El archivo " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " fue subido.";
