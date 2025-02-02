@@ -25,7 +25,7 @@ function registerUser($servername, $username, $password, $dbname, $nombre, $apel
 
     // Attempt to execute the statement
     if ($stmt->execute() === TRUE) {
-        echo "User registered successfully.<br>";
+        echo '<script> console.log("User registered successfully.")</script>';
     } else {
         echo "Error: " . $stmt->error . "<br>";
     }
