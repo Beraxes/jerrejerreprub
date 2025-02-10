@@ -1,10 +1,13 @@
 <?php
-$servername = "";
-$username = "gema";
-$password = "gema123";
-$dbname = "gemasas";
+require 'db/db_functions.php';
+$dbConfig = require 'db/db_config.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$servername = $dbConfig['servername'];
+$dbUsername = $dbConfig['dbUsername'];
+$dbPassword = $dbConfig['dbPassword'];
+$dbname = $dbConfig['dbname'];
+
+$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
