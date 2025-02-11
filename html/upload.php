@@ -13,24 +13,14 @@ $dbname = $dbConfig['dbname'];
 // File upload logic
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
 $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-// Check if the file already exists
-if (file_exists($target_file)) {
-    echo '<script>console.log("Archivo ya existe.")</script>';
-    $uploadOk = 0;
-}
-
-// If there were no upload errors, move the file
-if ($uploadOk === 0) {
-    echo '<script>console.log("Archivo no fue subido.")</script>';
+// Move the uploaded file (it will overwrite the existing one)
+if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+    $mensaje = "El archivo " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " fue subido y reemplazado si existía.";
+    echo "<script>console.log(" . json_encode($mensaje) . ");</script>";
 } else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "El archivo " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " fue subido.";
-    } else {
-        echo "Hubo un error subiendo el archivo.";
-    }
+    echo '<script>console.log("Hubo un error subiendo el archivo.")</script>';
 }
 
 // Initialize user arrays
