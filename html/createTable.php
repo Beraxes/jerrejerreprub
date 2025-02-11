@@ -1,5 +1,4 @@
 <?php
-require 'db/db_functions.php';
 $dbConfig = require 'db/db_config.php';
 
 $servername = $dbConfig['servername'];
