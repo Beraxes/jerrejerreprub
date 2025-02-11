@@ -6,7 +6,7 @@ Los puertos 3306 y 8080 no deben estar en uso.
 **Pasos a seguir:**
 
  1. *En la carpeta del proyecto abrir una terminal o consola y ejecutar `docker compose build && docker compose up -d` este paso arrancara el servicio de nginix con soporte para php y Servicio de Mysql.
- 2. *Abrimos localhost:8080/createTable.php para crear la tabla en la base de datos automaticamente.
- 3. Dirigirnos a localhost:8080 y subir el archivo a procesar.
+ 2. Nos dirigimos a localhost:8080 lo cual creara la tabla user si no existe e imprimira en consola si sucedio un error o si la tabla fue creada exitosamente.
+ 3. Ya que en el paso anterior abrimos localhost ahora es solo subir el archivo y darle a procesar archivo.
  4. (Opcional) Descargar o usar un software para las gestion de bases de datos ejemplo [Dbeaver](https://dbeaver.io/download/)
  5. Para conectarnos con Mysql en dbeaver usaremos la url: `jdbc:mysql://localhost:3306/gemasas?allowPublicKeyRetrieval=true&useSSL=false`, usuario y contraseña estan en el archivo docker-compose.yml
