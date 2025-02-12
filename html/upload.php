@@ -80,7 +80,7 @@ if (($handle = fopen($target_file, "r")) !== FALSE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios Procesados</title>
-    <link rel="stylesheet" href="upload.css">
+    <link rel="stylesheet" href="./assets/upload.css">
 </head>
 <body>
     <a href="/">Volver</a>
