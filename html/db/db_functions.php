@@ -141,4 +141,30 @@ function updateUser($servername, $username, $password, $dbname, $id, $nombre = n
     $stmt->close();
     $conn->close();
 }
+
+function deleteUser($servername, $dbUsername, $dbPassword, $dbname, $id) {
+    $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+
+    if ($conn->connect_error) {
+        return json_encode(["status" => "error", "message" => "Error de conexión: " . $conn->connect_error]);
+    }
+
+    $stmt = $conn->prepare("DELETE FROM user WHERE id = ?");
+    if (!$stmt) {
+        return json_encode(["status" => "error", "message" => "Error en la preparación de la consulta"]);
+    }
+
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        $response = ["status" => "success", "message" => "Usuario eliminado correctamente"];
+    } else {
+        $response = ["status" => "error", "message" => "Error al eliminar el usuario"];
+    }
+
+    $stmt->close();
+    $conn->close();
+
+    return json_encode($response);
+}
 ?>
