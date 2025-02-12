@@ -62,8 +62,10 @@ $conn->close();
 
         <form action="upload.php" method="post" enctype="multipart/form-data">
             <input type="file" name="fileToUpload" accept=".csv" required>
-            <button type="submit">Procesar Archivo</button>
+            <button class="primary" type="submit">Procesar Archivo</button>
         </form>
+        <p>Usuarios Registrados en la Base de datos: </p>
+        <button type="button" class="secondary" onclick="window.location.href='users.php'">Ver Usuarios</button>
     </div>
 </body>
 </html>

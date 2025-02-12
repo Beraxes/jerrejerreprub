@@ -1,21 +1,258 @@
+:root {
+    --primary-color: #00ffcc;
+    --secondary-color: #007bff;
+    --danger-color: #f44336;
+    --success-color: #04AA6D;
+    --background-color: #f4f4f4;
+    --text-color: #333333;
+    --border-color: #ddd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-color: #e9ecef;
+}
+
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--background-color);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 2rem;
 }
+
 .container {
     background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px var(--shadow-color);
     text-align: center;
+    max-width: 500px;
+    width: 90%;
+    margin: 0 auto;
 }
+
+/* Typography */
+h1, h2 {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
 h2 {
-    margin-bottom: 15px;
+    font-size: 1.5rem;
+    margin-top: 2rem;
 }
+
+/* Upload Section Styles */
+.upload-instructions {
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.upload-instructions h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.upload-instructions ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.upload-instructions li {
+    margin-bottom: 0.5rem;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    margin-bottom: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px var(--shadow-color);
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--secondary-color);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+td {
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+td:last-child {
+    width: 1%;
+    white-space: nowrap;
+    padding-right: 15px;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: var(--hover-color);
+}
+
+/* Form Elements */
 input[type="file"] {
-    margin-bottom: 10px;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+    border-color: var(--primary-color);
+}
+
+input[type="text"] {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Buttons */
+button {
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:last-child {
+    margin-right: 0;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+button.primary {
+    background-color: var(--primary-color);
+    color: #000;
+}
+
+button.secondary {
+    background-color: var(--secondary-color);
+}
+
+button.edit {
+    background-color: var(--secondary-color);
+}
+
+button.save {
+    background-color: var(--success-color);
+}
+
+button.cancel {
+    background-color: var(--danger-color);
+}
+
+button.delete {
+    background-color: var(--danger-color);
+}
+
+/* Status Select */
+.status {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    background-color: white;
+    min-width: 120px;
+}
+
+.status:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Error States */
+.error {
+    color: var(--danger-color);
+    font-weight: bold;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .container {
+        padding: 1.5rem;
+        width: 95%;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    td:last-child {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    button {
+        margin-right: 0;
+        flex: 1;
+        min-width: 80px;
+    }
+
+    .status {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
 }
