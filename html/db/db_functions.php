@@ -10,7 +10,7 @@ function emailExists($conn, $email) {
     return $result->num_rows > 0;
 }
 
-function registerUser($servername, $username, $password, $dbname, $nombre, $apellido, $email, $codigo) {
+function registerUser($servername, $username, $password, $dbname, $nombre, $apellido, $email, $codigo, $revisor_id) {
     // Create a connection to the database
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -20,8 +20,8 @@ function registerUser($servername, $username, $password, $dbname, $nombre, $apel
     }
 
     // Prepare and bind for registration
-    $stmt = $conn->prepare("INSERT INTO user (nombre, apellido, email, codigo) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $nombre, $apellido, $email, $codigo);
+    $stmt = $conn->prepare("INSERT INTO user (nombre, apellido, email, codigo, revisor_id) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssii", $nombre, $apellido, $email, $codigo, $revisor_id);
 
     // Attempt to execute the statement
     if ($stmt->execute() === TRUE) {
@@ -58,7 +58,8 @@ function fetchUsers($servername, $username, $password, $dbname) {
                 "id" => $row["id"],
                 "nombre" => $row["nombre"],
                 "apellido" => $row["apellido"],
-                "email" => $row["email"]
+                "email" => $row["email"],
+                "revisor" => $row["revisor_id"]
             ];
 
             switch ($row["codigo"]) {
@@ -80,7 +81,7 @@ function fetchUsers($servername, $username, $password, $dbname) {
     return $usuarios;
 }
 
-function updateUser($servername, $username, $password, $dbname, $id, $nombre = null, $apellido = null, $email = null, $codigo = null) {
+function updateUser($servername, $username, $password, $dbname, $id, $nombre = null, $apellido = null, $email = null, $codigo = null, $revisor_id = null) {
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
@@ -111,6 +112,11 @@ function updateUser($servername, $username, $password, $dbname, $id, $nombre = n
     if ($codigo !== null) {
         $fields[] = "codigo = ?";
         $params[] = $codigo;
+        $types .= "i";
+    }
+    if ($revisor_id !== null) {
+        $fields[] = "revisor_id = ?";
+        $params[] = $revisor_id;
         $types .= "i";
     }
 

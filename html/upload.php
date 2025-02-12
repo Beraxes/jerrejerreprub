@@ -36,6 +36,7 @@ if (($handle = fopen($target_file, "r")) !== FALSE) {
         $nombre = isset($data[1]) ? trim($data[1]) : "";
         $apellido = isset($data[2]) ? trim($data[2]) : "";
         $codigo = isset($data[3]) ? trim($data[3]) : "";
+        $revisor_id = isset($data[4]) ? trim($data[4]) : "";
 
         // Validate email
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -47,12 +48,12 @@ if (($handle = fopen($target_file, "r")) !== FALSE) {
         if (!emailExists($conn, $email)) {
             // Add user to the database
             if ($codigo >= 1 && $codigo <= 3) {
-                registerUser($servername, $dbUsername, $dbPassword, $dbname, $nombre, $apellido, $email, $codigo);
+                registerUser($servername, $dbUsername, $dbPassword, $dbname, $nombre, $apellido, $email, $codigo, $revisor_id);
             }
         }
         $conn->close();
 
-        $usuario = ["email" => $email, "nombre" => $nombre, "apellido" => $apellido, "codigo" => $codigo];
+        $usuario = ["email" => $email, "nombre" => $nombre, "apellido" => $apellido, "codigo" => $codigo, "revisor_id" => $revisor_id];
 
         // Classify the user based on codigo
         switch ($codigo) {
@@ -90,12 +91,14 @@ if (($handle = fopen($target_file, "r")) !== FALSE) {
             <th>Email</th>
             <th>Nombre</th>
             <th>Apellido</th>
+            <th>Revisor</th>
         </tr>
         <?php foreach ($usuarios_activos as $usuario) { ?>
             <tr>
                 <td><?php echo htmlspecialchars($usuario["email"]); ?></td>
                 <td><?php echo htmlspecialchars($usuario["nombre"]); ?></td>
                 <td><?php echo htmlspecialchars($usuario["apellido"]); ?></td>
+                <td><?php echo htmlspecialchars($usuario["revisor_id"]); ?></td>
             </tr>
         <?php } ?>
     </table>
@@ -106,12 +109,14 @@ if (($handle = fopen($target_file, "r")) !== FALSE) {
             <th>Email</th>
             <th>Nombre</th>
             <th>Apellido</th>
+            <th>Revisor</th>
         </tr>
         <?php foreach ($usuarios_inactivos as $usuario) { ?>
             <tr>
                 <td><?php echo htmlspecialchars($usuario["email"]); ?></td>
                 <td><?php echo htmlspecialchars($usuario["nombre"]); ?></td>
                 <td><?php echo htmlspecialchars($usuario["apellido"]); ?></td>
+                <td><?php echo htmlspecialchars($usuario["revisor_id"]); ?></td>
             </tr>
         <?php } ?>
     </table>
@@ -122,12 +127,14 @@ if (($handle = fopen($target_file, "r")) !== FALSE) {
             <th>Email</th>
             <th>Nombre</th>
             <th>Apellido</th>
+            <th>Revisor</th>
         </tr>
         <?php foreach ($usuarios_espera as $usuario) { ?>
             <tr>
                 <td><?php echo htmlspecialchars($usuario["email"]); ?></td>
                 <td><?php echo htmlspecialchars($usuario["nombre"]); ?></td>
                 <td><?php echo htmlspecialchars($usuario["apellido"]); ?></td>
+                <td><?php echo htmlspecialchars($usuario["revisor_id"]); ?></td>
             </tr>
         <?php } ?>
     </table>
@@ -140,6 +147,7 @@ if (($handle = fopen($target_file, "r")) !== FALSE) {
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Código</th>
+            <th>Revisor</th>
         </tr>
         <?php foreach ($usuarios_invalidos as $usuario) { ?>
             <tr>
@@ -147,6 +155,7 @@ if (($handle = fopen($target_file, "r")) !== FALSE) {
                 <td><?php echo htmlspecialchars($usuario["nombre"]); ?></td>
                 <td><?php echo htmlspecialchars($usuario["apellido"]); ?></td>
                 <td><?php echo htmlspecialchars($usuario["codigo"]); ?></td>
+                <td><?php echo htmlspecialchars($usuario["revisor"]); ?></td>
             </tr>
         <?php } ?>
     </table>

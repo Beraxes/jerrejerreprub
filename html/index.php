@@ -12,28 +12,47 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$tableCheckQuery = "SHOW TABLES LIKE 'revisores'";
+$tableExistsResult = $conn->query($tableCheckQuery);
+
+if ($tableExistsResult->num_rows == 0) {
+    $createTableQuery = "CREATE TABLE revisores (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(45) DEFAULT NULL,
+        apellido VARCHAR(45) DEFAULT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+    if ($conn->query($createTableQuery) === TRUE) {
+        echo '<script>console.log("Table revisores created successfully.")</script>';
+    } else {
+        echo '<script>console.error("ERROR: ' . addslashes($conn->error) . '");</script>';
+    }
+} else {
+    echo '<script>console.log("Table revisores already exists.")</script>';
+}
+
 $tableCheckQuery = "SHOW TABLES LIKE 'user'";
 $tableExistsResult = $conn->query($tableCheckQuery);
 
 if ($tableExistsResult->num_rows == 0) {
-    // Table does not exist, create it
     $createTableQuery = "CREATE TABLE user (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(255) DEFAULT NULL,
         apellido VARCHAR(255) DEFAULT NULL,
         email VARCHAR(255) NOT NULL,
-        codigo VARCHAR(255) NOT NULL
+        codigo VARCHAR(255) NOT NULL,
+        revisor_id INT,
+        FOREIGN KEY (revisor_id) REFERENCES revisores(id)
     )";
 
     if ($conn->query($createTableQuery) === TRUE) {
         echo '<script>console.log("Table user created successfully.")</script>';
     } else {
-        echo '<script>console.log("ERROR")</script>' . $conn->error;echo '<script>console.error("ERROR: ' . addslashes($conn->error) . '");</script>';
+        echo '<script>console.error("ERROR: ' . addslashes($conn->error) . '");</script>';
     }
 } else {
     echo '<script>console.log("Table user already exists.")</script>';
 }
-
 $conn->close();
 ?>
 
