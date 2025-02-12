@@ -8,10 +8,11 @@ table {
 }
 
 th, td {
-    padding: 12px;
+    padding: 15px;
     text-align: left;
     border: 1px solid black; 
     padding: 8px; 
+
 }
 
 th {
@@ -23,6 +24,12 @@ th {
 
 td {
     border-bottom: 1px solid #000000;
+    vertical-align: middle;
+}
+td:last-child {
+    width: 1%;
+    white-space: nowrap;
+    padding-right: 15px;
 }
 
 tr:nth-child(even) {
@@ -41,11 +48,16 @@ tr:hover {
 button {
     border: none;
     color: white;
-    padding: 5px 15px;
+    padding: 8px 16px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
-  }
+    margin-right: 8px;
+    border-radius: 4px;
+}
+button:last-child {
+    margin-right: 0;
+}
 
 .edit{
     background-color: #007bff;
@@ -56,9 +68,13 @@ button {
 .save{
     background-color: #04AA6D;
 }
+.delete{
+    background-color: #ff0000;
+}
 
 .status {
-    width: 100%;
+    width: 1%;
+    white-space: nowrap;
     min-width: 15ch;
     max-width: 30ch;
     border: 1px solid var(--select-border);
@@ -68,5 +84,12 @@ button {
     cursor: pointer;
     line-height: 1.1;
     background-color: #fff;
-    background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  }
+
+  input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
   }
