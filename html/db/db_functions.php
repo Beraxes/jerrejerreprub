@@ -42,7 +42,12 @@ function fetchUsers($servername, $username, $password, $dbname) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM user WHERE codigo IN (1, 2, 3)";
+    $sql = "SELECT u.id, u.nombre, u.apellido, u.email, u.revisor_id, 
+                   r.nombre AS revisor_nombre, r.apellido AS revisor_apellido, u.codigo
+            FROM user u
+            LEFT JOIN revisores r ON u.revisor_id = r.id
+            WHERE u.codigo IN (1, 2, 3)";
+
     $result = $conn->query($sql);
 
     $usuarios = [
@@ -54,12 +59,11 @@ function fetchUsers($servername, $username, $password, $dbname) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $usuario = [
-
                 "id" => $row["id"],
                 "nombre" => $row["nombre"],
                 "apellido" => $row["apellido"],
                 "email" => $row["email"],
-                "revisor" => $row["revisor_id"]
+                "revisor" => $row["revisor_nombre"] . " " . $row["revisor_apellido"] // Unir nombre y apellido del revisor
             ];
 
             switch ($row["codigo"]) {

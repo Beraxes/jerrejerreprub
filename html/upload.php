@@ -84,7 +84,7 @@ if (($handle = fopen($target_file, "r")) !== FALSE) {
     <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
-    <a href="/">Volver</a>
+<button onclick="window.location.href='/';" class="secondary">Volver</button>
     <h2>Usuarios Activos</h2>
     <table>
         <tr>
@@ -140,7 +140,8 @@ if (($handle = fopen($target_file, "r")) !== FALSE) {
     </table>
 
     <h2 class="error">Usuarios con Formato Inválido</h2>
-    <p class="error">Algunos registros tienen un código inválido. Formato correcto: <strong>Email, Nombre, Apellido, Código (1, 2 o 3)</strong></p>
+    <p class="error">Algunos registros tienen un código inválido. Formato correcto: <strong>Email, Nombre, Apellido, Código (1, 2 o 3), Revisor (1 a 8) </br> Para evitar estos problemas favor usar el formato correcto</strong></p>
+    <p class="success">Por suerte para usted decidimos ignorar este registro y registrar todos los que tienen formato valido🫡🫡</strong></p>
     <table>
         <tr>
             <th>Email</th>
@@ -155,7 +156,7 @@ if (($handle = fopen($target_file, "r")) !== FALSE) {
                 <td><?php echo htmlspecialchars($usuario["nombre"]); ?></td>
                 <td><?php echo htmlspecialchars($usuario["apellido"]); ?></td>
                 <td><?php echo htmlspecialchars($usuario["codigo"]); ?></td>
-                <td><?php echo htmlspecialchars($usuario["revisor"]); ?></td>
+                <td><?php echo htmlspecialchars($usuario["revisor_id"]); ?></td>
             </tr>
         <?php } ?>
     </table>
